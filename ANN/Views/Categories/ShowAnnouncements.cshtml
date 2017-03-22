@@ -1,0 +1,43 @@
+﻿@model Repository.Models.View.AnnouncementsFromCategoryViewModels
+
+@{
+    ViewBag.Title = "Ogłoszenia z kategorii:" + Model.CategoryName;
+}
+
+<h2>Ogłoszenia z kategorii: @Model.CategoryName</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Announcements.First().UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Announcements.First().Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Announcements.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Announcements.First().DateAdded)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Announcements)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+        </tr>
+    }
+</table>

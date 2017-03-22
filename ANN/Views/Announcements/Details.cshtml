@@ -1,0 +1,56 @@
+﻿@model Repository.Models.Announcement
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Szczególy ogłoszenia nr " + @Model.Id;
+    ViewBag.Description = "Szczególy ogłoszenia nr " + @Model.Id + "Opis do Google";
+    ViewBag.KeyWords = "Ogłoszenie, " + @Model.Id + ", szczególy";
+}
+
+<h2>Sczególy ogłoszenia nr: @Model.Id</h2>
+
+<div>
+    <h4>Ogłoszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id autora:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            Treść:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            Tytuł:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Data dodania:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Worker") || Model.UserId == User.Identity.GetUserId()))
+    {
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    }
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
+</p>
